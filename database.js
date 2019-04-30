@@ -2,12 +2,10 @@ var mysql = require('mysql');
 
 // Change this info to what your local DB connection info is
 var connection = mysql.createConnection({
-    host: '127.0.0.1:3306',
+    host: '127.0.0.1',
     user: 'root',
-    password: '',
+    password: 'password',
     database: 'plantatree',
-    connectionLimit: 20,
-    multipleStatements: true,
 });
 
 // Establishing connection to database using relevant information
