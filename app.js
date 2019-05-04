@@ -44,7 +44,7 @@ app.use(session({
 // Tell the app to use the defined routes from above
 app.use(require('./routes/index'));
 app.use(require('./routes/product_routes'));
-require('./routes/signupLogin.js')(app, passport)
+require('./routes/signupLogin')(app, passport)
 
 
 

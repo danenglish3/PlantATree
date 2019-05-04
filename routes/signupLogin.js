@@ -1,23 +1,13 @@
-var express = require('express');
-var router = express.Router();
-module.exports = function(router, passport) {
-    router.get('/', function(req, res){
+module.exports = function(app, passport) {
+    app.get('/', function(req, res){
      res.render('index.ejs');
     });
-
-    router.get('/login', function(req, res){
-     res.render('./profile/login.ejs', {message:req.flash('loginMessage')});
+   
+    app.get('/login', function(req, res){
+     res.render('profile/login.ejs', {message:req.flash('loginMessage')});
     });
-
-    router.use(function isLoggedIn(req, res, next){
-        if(req.isAuthenticated())
-         return next();
-    
-        res.redirect('/');
-       }
-    )
-
-    router.post('/login', passport.authenticate('local-login', {
+   
+    app.post('/login', passport.authenticate('local-login', {
      successRedirect: '/profile',
      failureRedirect: '/login',
      failureFlash: true
@@ -30,32 +20,32 @@ module.exports = function(router, passport) {
       }
       res.redirect('/');
      });
-
-     router.get('/signup', function(req, res){
-     res.render('./profile/signup.ejs', {message: req.flash('signupMessage')});
+   
+    app.get('/signup', function(req, res){
+     res.render('profile/signup.ejs', {message: req.flash('signupMessage')});
     });
-
-    router.post('/signup', passport.authenticate('local-signup', {
+   
+    app.post('/signup', passport.authenticate('local-signup', {
      successRedirect: '/profile',
      failureRedirect: '/signup',
      failureFlash: true
     }));
-
-    router.get('/profile', isLoggedIn, function(req, res){
-     res.render('profile.ejs', {
+   
+    app.get('/profile', isLoggedIn, function(req, res){
+     res.render('profile/profile.ejs', {
       user:req.user
      });
     });
-
-    router.get('/logout', function(req,res){
+   
+    app.get('/logout', function(req,res){
      req.logout();
      res.redirect('/');
     })
    };
-
+   
    function isLoggedIn(req, res, next){
     if(req.isAuthenticated())
      return next();
-
+   
     res.redirect('/');
    }
