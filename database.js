@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+//This file does not interact with the app.js file. But, it shows that the DB connection does not have to be in app.js
 
 // Change this info to what your local DB connection info is
 var connection = mysql.createConnection({
@@ -16,4 +17,4 @@ connection.connect((err) => {
     console.log('Successfully connected to MySQL DB');
 });
 
-module.exports = connection;
+module.exports = connection; //Export the DB connection 
