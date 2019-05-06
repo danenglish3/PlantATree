@@ -3,6 +3,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var multer = require('multer');
 var bodyParser = require('body-parser');
+//
+var morgan = require('morgan');
+var session = require('express-session');
+var passport = require('passport');
+var flash = require('connect-flash');
+require('./config/passport')(passport);
 
 const app = express();
 const PORT = 3000;
@@ -17,10 +23,30 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer({ storage: multer.memoryStorage({}) }).any());
 app.use(cookieParser());
+// ** CHANGED THIS
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({
+ extended: true
+}));
+app.use(session({
+  secret: 'justasecret',
+  resave:true,
+  saveUninitialized: true
+ }));
+ 
+ app.use(passport.initialize());
+ app.use(passport.session());
+ app.use(flash());
+ 
+
 
 // Tell the app to use the defined routes from above
 app.use(require('./routes/index'));
 app.use(require('./routes/product_routes'));
+require('./routes/signupLogin')(app, passport)
+
+
 
 app.listen(PORT, () => {
   console.log(`The app is running on port ${PORT} at 'http://localhost:${PORT}' (Use CTRL + C to exit)`);
