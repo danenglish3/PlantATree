@@ -11,12 +11,14 @@ connection.query('USE ' + dbconfig.database);
 module.exports = function(passport) {
  passport.serializeUser(function(user, done){
   done(null, user.user_ID); //changed from .id
+  console.log("in serializeUser");
  });
 
  passport.deserializeUser(function(id, done){
   connection.query("SELECT * FROM users WHERE user_ID = ? ", [id],
    function(err, rows){
     done(err, rows[0]);
+    console.log("in deSerializeUser");
    });
  });
 
@@ -46,7 +48,7 @@ module.exports = function(passport) {
             console.log(err);
             return done(null, err);
           } else {
-            newUserMysql.id = rows.insertId;
+            newUserMysql.user_ID = rows.insertId;
             return done(null, newUserMysql);
         }
      });

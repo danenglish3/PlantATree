@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
     host: '127.0.0.1',
     user: 'root',
     password: 'password',
-    database: 'mydb',
+    database: 'plantatree',
 });
 
 // Establishing connection to database using relevant information
