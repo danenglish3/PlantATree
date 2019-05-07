@@ -8,7 +8,7 @@ module.exports = function(app, passport) {
     });
    
     app.post('/login', passport.authenticate('local-login', {
-     successRedirect: '/profile',
+     successRedirect: '/index', //changed from /profile
      failureRedirect: '/login',
      failureFlash: true
     }),
@@ -26,16 +26,17 @@ module.exports = function(app, passport) {
     });
    
     app.post('/signup', passport.authenticate('local-signup', {
-     successRedirect: '/profile',
+     successRedirect: '/index', //changed from /profile
      failureRedirect: '/signup',
      failureFlash: true
     }));
    
-    app.get('/profile', isLoggedIn, function(req, res){
-     res.render('profile/profile.ejs', {
+    app.get('/index', isLoggedIn, function(req, res){//changed from /profile
+     res.render('./home/index.ejs', { //changed from /profile/profile.ejs
       user:req.user
      });
     });
+    //***ADDED HERE */
    
     app.get('/logout', function(req,res){
      req.logout();
