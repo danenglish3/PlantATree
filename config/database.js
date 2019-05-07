@@ -4,6 +4,6 @@ module.exports = {
      'user':'root',
      'password':'password'
     },
-    'database':'mydb',
+    'database':'plantatree',
     'user_table':'users'
    }
