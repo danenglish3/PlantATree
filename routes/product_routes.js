@@ -1,43 +1,34 @@
 var express = require('express');
 var router = express.Router();
 var con = require('../database.js');
+var fs = require('fs');
 
 /* GET product page. */
 
 router.get('/product/:id', function(req, res, next) {
+  var id = req.params.id;
+  var name, price, description_text, description, image;
+
   con.query("SELECT * FROM PRODUCT", function(err, result){
     if (err) throw err;
-    var id = req.params.id;
 
-    //Blocked out for presentation reasons, this is how the pages are supposed to operate
-    /*if(id < result.length){
-      var name = result[id].product_name;
-      var price = '$' + result[id].product_price;
-      var description = result[id].product_description;
+    if(id < result.length){
+      name = result[id].product_name;
+      price = '$' + result[id].product_price;
+      description_text = new String(result[id].product_description);
+      description = description_text.split("\n"); 
 
-      res.render('products/product_info', {name: name, price: price, description: description});
     } else {
-      var name = 'You';
-      var price = 'are not';
-      var description = 'supposed to be here';
+      //error page
+      res.render('home/index');
+    } 
 
-      res.render('products/product_info', {name: name, price: price, description: description});
-    } */
-    
-    //Using this for presentation reasons, to make index look nice and look like we have something to sell
-    if(id == 1){
-      res.render('products/test_product1');
-    } else if(id == 2){
-      res.render('products/test_product2');
-    } else if(id == 3){
-      res.render('products/test_product3');
-    } else if(id == 4){
-      res.render('products/test_product4');
-    } else if(id == 5){
-      res.render('products/test_product5');
-    } else if(id == 6){
-      res.render('products/test_product6');
-    }
+    con.query("SELECT * FROM images WHERE product_id ="+id, function(err, result){
+      if (err) throw err;
+      image = result[0].name;
+    });
+
+    res.render('products/product_info', {name: name, price: price, description: description, image: image});
   });
 });
 

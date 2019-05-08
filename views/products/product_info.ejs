@@ -18,11 +18,15 @@
       <div class="col-lg-9">
 
         <div class="card mt-4">
-          <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+          <img class="card-img-top img-fluid" src="/images/<%= image %>" alt="">
           <div class="card-body">
             <h3 class="card-title"><%= name %></h3>
             <h4><%= price %></h4>
-            <p class="card-text"><%= description %></p>
+            
+            <% for(var i = 0; i < description.length; i++) {%>
+              <p class="card-text"><%= description[i] %></p>
+            <%}%>
+
             <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
             4.0 stars
           </div>
