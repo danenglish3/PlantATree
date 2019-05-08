@@ -37,13 +37,13 @@
           </ol>
           <div class="carousel-inner" role="listbox">
             <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://www.majestictrees.co.uk/images/top_images/home-header/Majestic-Home-Top-Images-1.jpg" alt="First slide">
+              <img class="d-block img-fluid" src="/images/homepage/home-page-1.jpg" alt="First slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://www.majestictrees.co.uk/images/top_images/home-header/Majestic-Home-Top-Images-6.jpg" alt="Second slide">
+              <img class="d-block img-fluid" src="/images/homepage/home-page-2.jpg" alt="Second slide">
             </div>
             <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://www.caerancaravanpark.co.uk/wpimages/wp13986012_05_06.jpg" alt="Third slide">
+              <img class="d-block img-fluid" src="/images/homepage/home-page-3.jpg" alt="Third slide">
             </div>
           </div>
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -58,102 +58,25 @@
 
         <div class="row">
 
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://www.brownstreefarm.com/data/uploads/media/image/Blue-Spruce-lg.jpg?w=700" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Christmas Tree</a>
-                </h4>
-                <h5>$55.99</h5>
-                <p class="card-text">An evergreen tree, often a pine or a fir, decorated with lights and ornaments as a part of Christmas festivities.</p>
+          <% for(var j = 0; j < 6; j++ ) { %>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="/images/<%= img[j].title %>" alt=""></a>          
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="#"><%= results[j].name %></a>
+                  </h4>
+                  <h5>$<%= results[j].price%></h5>   
+                  <p class="card-text"><%= results[j].desc%></p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
               </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
+            </div>  
+          <%}%>
 
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="https://www.floralencounters.com/blog/wp-content/uploads/japanese_apricot_flowers.jpg" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Cherry Blossom</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">The Japanese love cherry blossoms so much, they've turned them into an ice cream flavor.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="https://www.lifeinthefingerlakes.com/wp-content/uploads/2018/02/white-pine-war.jpg" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Pine Tree</a>
-                </h4>
-                <h5>$88.99</h5>
-                <p class="card-text">Pine trees are evergreen, coniferous resinous trees (or, rarely, shrubs) growing 3–80m tall.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="https://dailypost.in/wp-content/uploads/2019/05/24-2.jpg" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Banana Tree</a>
-                </h4>
-                <h5>$39.99</h5>
-                <p class="card-text">The banana plant is the largest herbaceous flowering plant. All the above-ground parts of a banana plant grow. </p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://apexport.in/images/palm-1.jpg" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Coconut Tree</a>
-                </h4>
-                <h5>$99.99</h5>
-                <p class="card-text">The coconut palm, Cocos nucifera, is an erect palm in the family Arecaceae which is grown its fruits.</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://www.jubileeonlinechurch.org/wp-content/uploads/2018/01/Apple-Tree.jpg" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Apple Tree</a>
-                </h4>
-                <h5>$15.99</h5>
-                <p class="card-text">Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus. </p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-              </div>
-            </div>
-          </div>
-
+        
         </div>
         <!-- /.row -->
 
