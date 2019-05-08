@@ -7,7 +7,9 @@ var fs = require('fs');
 
 router.get('/product/:id', function(req, res, next) {
   var id = req.params.id;
-  var name, price, description_text, description, image;
+  var name, price, description_text, description, image, alt;
+
+  var image_path = 'C:\\Users\\Gillian\\Desktop\\FOR PRODUCTS\\'; //Should be url where the images are stored/hosted. Used for temporary image path <- change it to fit or just remove entirely
 
   con.query("SELECT * FROM PRODUCT", function(err, result){
     if (err) throw err;
@@ -23,12 +25,14 @@ router.get('/product/:id', function(req, res, next) {
       res.render('home/index');
     } 
 
-    con.query("SELECT * FROM images WHERE product_id ="+id, function(err, result){
+    var image_query = `SELECT name from images WHERE images.product_id = ${id}`;
+    con.query(image_query, function(err, result){
       if (err) throw err;
-      image = result[0].name;
+      alt = result[0].name;
+      //image = result[0].url; //preferably the image url as opposed to its name or its blob data
+      image = image_path+alt; //used for now
+      res.render('products/product_info', {name: name, price: price, description: description, image: image, alt: alt});
     });
-
-    res.render('products/product_info', {name: name, price: price, description: description, image: image});
   });
 });
 
