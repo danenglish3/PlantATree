@@ -9,7 +9,7 @@ router.get('/product/:id', function(req, res, next) {
   var id = req.params.id;
   var name, price, description_text, description, image, alt;
 
-  var image_path = 'C:\\Users\\Gillian\\Desktop\\FOR PRODUCTS\\'; //Should be url where the images are stored/hosted. Used for temporary image path <- change it to fit or just remove entirely
+  var image_path = ''; //Should be url where the images are stored/hosted. Used for temporary image path <- change it to fit or just remove entirely
 
   con.query("SELECT * FROM PRODUCT", function(err, result){
     if (err) throw err;
