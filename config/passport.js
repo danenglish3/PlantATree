@@ -1,4 +1,4 @@
-//put this into route
+//update a current row
 var LocalStrategy = require("passport-local").Strategy;
 
 var mysql = require('mysql');
@@ -39,11 +39,13 @@ module.exports = function(passport) {
     }else{
      var newUserMysql = {
       username: username,
-      password: bcrypt.hashSync(password, null, null)
+      password: bcrypt.hashSync(password, null, null),
+      wholesaler: req.body.wholesaler
      };
 
-     var insertQuery = "INSERT INTO users (email_address, password) values (?, ?)";
-     connection.query(insertQuery, [newUserMysql.username, newUserMysql.password], function(err, rows) {
+     console.log("WHOLESALER"+newUserMysql.wholesaler+"\n"+"WHOLESALER"+req.body.wholesaler);
+     var insertQuery = "INSERT INTO users (email_address, password, wholesaler) values (?, ?, ?)";
+     connection.query(insertQuery, [newUserMysql.username, newUserMysql.password, newUserMysql.wholesaler], function(err, rows) {
           if(err) {
             console.log(err);
             return done(null, err);

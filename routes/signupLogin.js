@@ -23,6 +23,7 @@ module.exports = function(app, passport) {
    
     app.get('/signup', function(req, res){
      res.render('profile/signup.ejs', {message: req.flash('signupMessage')});
+        console.log(req.body);
     });
    
     app.post('/signup', passport.authenticate('local-signup', {
