@@ -61,6 +61,9 @@ function getImage(productPool) {
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
+  var passedVariable = req.user;
+  console.log(passedVariable);
+  req.session.valid = null;
   getProducts()
     .then(getImage)
     .then(function ([results, img]) {
