@@ -11,12 +11,12 @@ connection.query('USE ' + dbconfig.database);
 module.exports = function (passport) {
 
   passport.serializeUser(function (user, done) {
-    console.log("hit here:" + user.user_ID.toString());
     return done(null, user.user_ID); //changed from .id
   });
 
   passport.deserializeUser(function (id, done) {
     connection.query("SELECT * FROM users WHERE user_ID = ? ", [id], function (err, rows) {
+      done(err, rows[0]);
     });
   });
 
