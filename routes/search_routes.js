@@ -51,7 +51,6 @@ function getImageSearch(productPool) {
     //Use this function to add image to array
     function addImageSearch(img, done){
       var image = {title: img[0].name}
-      console.log(image);
           imagePool.push(image);
           done(); //head back to callback function
     }
@@ -61,13 +60,12 @@ function getImageSearch(productPool) {
 /* GET product page. */
 router.get('/search/:keyword', function(req, res, next) {
     var keyword = req.params.keyword;
-
-    console.log(keyword);
+    var passedVariable = req.user;
 
   getProductsSearch(keyword)
     .then(getImageSearch)
     .then(function ([results, img]) {
-      res.render('search/search', { results, img, keyword });
+      res.render('search/search', { results, img, keyword, passedVariable });
     }).catch(function (err) {
       console.log("Promise rejection error: " + err);
     })
