@@ -15,3 +15,12 @@ connection.connect((err) => {
 });
 
 module.exports = connection;
+
+var dbCheck = `SHOW TABLES`;
+connection.query(dbCheck, (err, res) => {
+    if (res.length === 0){
+        var tables = require('./dbcreate');
+        tables.createTables();        
+    }
+});
+
