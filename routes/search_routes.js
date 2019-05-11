@@ -4,8 +4,8 @@ var connection = require('../database.js');
 var async = require('async');
 
 getProductsSearch = function (keyword) {
-  const queryProducts = `SELECT * FROM product WHERE (product_type = "${keyword}") OR (product_name LIKE "%${keyword}%");`;
-  console.log(queryProducts);
+  const queryProducts = `SELECT * FROM product WHERE (product_type = "${keyword}") OR (product_name LIKE "%${keyword}%")
+                          OR (product_description LIKE "%${keyword}%");`;
   var productPool = [];
   return new Promise(function (resolve, reject) { //New promise so this finishs completely before moving on
     connection.query(queryProducts, function (err, rows) {
@@ -22,7 +22,6 @@ getProductsSearch = function (keyword) {
           }
           productPool.push(product); //Push new product into easily accessable array
         });
-        console.log(productPool);
         resolve(productPool); //Once finished resolve (return) the prodcut array
       }
     });
