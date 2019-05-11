@@ -60,12 +60,12 @@ function getImageSearch(productPool) {
 /* GET product page. */
 router.get('/search/:keyword', function(req, res, next) {
     var keyword = req.params.keyword;
-
+    var passedVariable = req.user;
 
   getProductsSearch(keyword)
     .then(getImageSearch)
     .then(function ([results, img]) {
-      res.render('search/search', { results, img, keyword });
+      res.render('search/search', { results, img, keyword, passedVariable });
     }).catch(function (err) {
       console.log("Promise rejection error: " + err);
     })

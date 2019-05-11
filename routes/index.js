@@ -61,11 +61,11 @@ function getImage(productPool) {
 /* GET home page. */
 router.get('/', (req, res, next) => {
   var passedVariable = req.user;
-  // req.session.valid = null;
+  console.log(passedVariable);
   getProducts()
     .then(getImage)
     .then(function ([results, img]) {
-      res.render('home/index', { results, img });
+      res.render('home/index', { results, img, passedVariable });
     }).catch(function (err) {
       console.log("Promise rejection error: " + err);
     })
