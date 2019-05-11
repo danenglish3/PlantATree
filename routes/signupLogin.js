@@ -1,8 +1,5 @@
 module.exports = function(app, passport) {
-    app.get('/', function(req, res){
-     res.render('index.ejs');
-    });
-   
+
     app.get('/login', function(req, res){
      res.render('profile/login.ejs', {message:req.flash('loginMessage')});
     });
@@ -23,7 +20,6 @@ module.exports = function(app, passport) {
    
     app.get('/signup', function(req, res){
      res.render('profile/signup.ejs', {message: req.flash('signupMessage')});
-        console.log(req.body);
     });
    
     app.post('/signup', passport.authenticate('local-signup', {
@@ -33,9 +29,7 @@ module.exports = function(app, passport) {
     }));
    
     app.get('/index', isLoggedIn, function(req, res){//changed from /profile
-     res.render('./home/index.ejs', { //changed from /profile/profile.ejs
-      user:req.user
-     });
+        res.redirect('/' ) 
     });
     //***ADDED HERE */
    
@@ -45,7 +39,7 @@ module.exports = function(app, passport) {
     })
    };
    
-   function isLoggedIn(req, res, next){
+   function isLoggedIn(req, res, next, ){
     if(req.isAuthenticated())
      return next();
    
