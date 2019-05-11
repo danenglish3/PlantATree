@@ -3,9 +3,9 @@ var router = express.Router();
 var connection = require('../database.js');
 var async = require('async');
 
-//This function will pull 6 products from the database
-getProducts = function () {
-  const queryProducts = `SELECT * FROM product LIMIT 6;`;
+getProductsSearch = function (keyword) {
+  const queryProducts = `SELECT * FROM product WHERE (product_type = "${keyword}") OR (product_name LIKE "%${keyword}%")
+                          OR (product_description LIKE "%${keyword}%");`;
   var productPool = [];
   return new Promise(function (resolve, reject) { //New promise so this finishs completely before moving on
     connection.query(queryProducts, function (err, rows) {
@@ -28,8 +28,7 @@ getProducts = function () {
   })
 }
 
-// This function will pull 6 images relating to the products grabbed
-function getImage(productPool) {
+function getImageSearch(productPool) {
   var imagePool = []; //Variable to hold image data
   return new Promise(function (resolve, reject) {
     async.forEachOf(productPool, function (dataElement, i, inner_callback){ //Async to allow each call to not overlap
@@ -38,7 +37,7 @@ function getImage(productPool) {
         if (rows[0] === undefined){
           inner_callback();          
         } else {
-          addImage(rows, inner_callback); //Call addimage function to add it (pass callback so it knows where to go afterwards)
+          addImageSearch(rows, inner_callback); //Call addimage function to add it (pass callback so it knows where to go afterwards)
         }
       })
     }, function(err) {
@@ -50,7 +49,7 @@ function getImage(productPool) {
     });
 
     //Use this function to add image to array
-    function addImage(img, done){
+    function addImageSearch(img, done){
       var image = {title: img[0].name}
           imagePool.push(image);
           done(); //head back to callback function
@@ -58,17 +57,19 @@ function getImage(productPool) {
   })
 }
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  var passedVariable = req.user;
-  // req.session.valid = null;
-  getProducts()
-    .then(getImage)
+/* GET product page. */
+router.get('/search/:keyword', function(req, res, next) {
+    var keyword = req.params.keyword;
+
+
+  getProductsSearch(keyword)
+    .then(getImageSearch)
     .then(function ([results, img]) {
-      res.render('home/index', { results, img });
+      res.render('search/search', { results, img, keyword });
     }).catch(function (err) {
       console.log("Promise rejection error: " + err);
     })
+
 });
 
 module.exports = router;
