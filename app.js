@@ -45,6 +45,7 @@ app.use(session({
 app.use(require('./routes/index'));
 app.use(require('./routes/product_routes'));
 app.use(require('./routes/search_routes'));
+app.use(require('./routes/upload_routes'));
 require('./routes/signupLogin')(app, passport)
 
 
