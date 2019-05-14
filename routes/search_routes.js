@@ -4,8 +4,9 @@ var connection = require('../database.js');
 var async = require('async');
 
 getProductsSearch = function (keyword) {
-  const queryProducts = `SELECT * FROM product WHERE (product_type = "${keyword}") OR (product_name LIKE "%${keyword}%")
-                          OR (product_description LIKE "%${keyword}%");`;
+  console.log(keyword);
+  const queryProducts = `SELECT * FROM product WHERE (product_name LIKE "%${keyword}%")
+                          OR (product_description LIKE "%${keyword}%") OR (product_type LIKE "%${keyword}%");`;
   var productPool = [];
   return new Promise(function (resolve, reject) { //New promise so this finishs completely before moving on
     connection.query(queryProducts, function (err, rows) {
