@@ -4,9 +4,15 @@ var connection = require('../database.js');
 var async = require('async');
 
 getProductsSearch = function (keyword) {
-  console.log(keyword);
+  if (keyword === ("Supplies")){ //Changed to just keep the results pages looking nice and tidy
+    keyword = "supply";
+  } else if (keyword[keyword.length-1] === 's' || keyword[keyword.length-1] === 'S'){ //EG trees will become tree in the query
+    keyword = keyword.slice(0,keyword.length-1);
+  }
+  //Ordering by relevant product type first
   const queryProducts = `SELECT * FROM product WHERE (product_name LIKE "%${keyword}%")
-                          OR (product_description LIKE "%${keyword}%") OR (product_type LIKE "%${keyword}%");`;
+                          OR (product_description LIKE "%${keyword}%") OR (product_type LIKE "%${keyword}%")
+                          ORDER BY FIELD(product_type, "${keyword}") DESC;`;
   var productPool = [];
   return new Promise(function (resolve, reject) { //New promise so this finishs completely before moving on
     connection.query(queryProducts, function (err, rows) {
@@ -20,6 +26,10 @@ getProductsSearch = function (keyword) {
             type: element.product_type,
             price: element.product_price,
             desc: element.product_description,
+          }
+          if(product.desc.length > 120){
+            product.desc = product.desc.slice(0,150);
+            product.desc += "...";
           }
           productPool.push(product); //Push new product into easily accessable array
         });
