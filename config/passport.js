@@ -37,10 +37,14 @@ module.exports = function(passport) {
     if(rows.length){
      return done(null, false, req.flash('signupMessage', 'That is already taken'));
     }else{
+      if(username.match(/\S+@\S+\.\S+/)){
      var newUserMysql = {
       username: username,
       password: bcrypt.hashSync(password, null, null),
       wholesaler: req.body.wholesaler
+      }}else {
+        return done(null, false, req.flash('signupMessage', 'Please enter a valid email address'));
+     }
      };
 
      console.log("WHOLESALER"+newUserMysql.wholesaler+"\n"+"WHOLESALER"+req.body.wholesaler);
@@ -54,7 +58,6 @@ module.exports = function(passport) {
             return done(null, newUserMysql);
         }
      });
-    }
    });
   })
  );
