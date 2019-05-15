@@ -18,7 +18,7 @@ getProducts = function () {
             name: element.product_name,
             type: element.product_type,
             price: element.product_price,
-            desc: element.product_description,
+            desc: String(element.product_description).replace(/\\n/,''), //to remove '\n'
           }
           productPool.push(product); //Push new product into easily accessable array
         });
