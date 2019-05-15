@@ -17,11 +17,17 @@
       <div class="col-lg-9">
 
         <div class="card mt-4">
-          <img class="card-img-top img-fluid" src="http://www.brownstreefarm.com/data/uploads/media/image/Blue-Spruce-lg.jpg?w=700" alt="">
+          
           <div class="card-body">
-            <h3 class="card-title">Christmas Tree</h3>
-            <h4>$24.99</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+          <!-- Changes the information on the product card based on what's been sent by the product_routes.js. Ratings are excluded for now. -->
+            <img class="card-img-top img-fluid" src='<%= image %>' alt='<%= alt %>'>
+            <h3 class="card-title"><%= name %></h3>
+            <h4><%= price %></h4>
+            
+            <% for(var i = 0; i < description.length; i++) {%>
+              <p class="card-text"><%= description[i] %></p>
+            <%}%>
+
             <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
             4.0 stars
             <button id="add" onclick="test()">TEST</button>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--This tag includes the header section (all relative bootstrap css is in this file-->
+
+<head>
+  <% include ../partials/head %>
+</head>
+
+<body>
+  <!-- Navigation bar partial -->
+  <% include ../partials/navbar %>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class=row>
+      <div class="col-lg-3">
+        <br><br><br><br>
+        <div class="list-group">
+          <a href="/search/Tree" class="list-group-item">Trees</a>
+          <a href="/search/Shrub" class="list-group-item">Shrubs / Bushes</a>
+          <a href="/search/Supplies" class="list-group-item">Garding Supplies</a>
+            <form onsubmit="window.location = '/search/' + search.value; return false;">
+          <div class="list-group-item">
+                <input class="form-control form-control form-control-borderless" id="search"
+                  placeholder="Search for items" type="search" name="search" required></input><br>
+                <button class="btn btn-sm btn-success" type="submit">Search</button>
+              </div>
+
+            </form>
+        </div>
+
+      </div>
+      <div class="col-lg-9">
+        <div class="row">
+
+          <div class="col">
+            <br>
+            <div id="search-banner" class="text-center border-top border-bottom">
+              <small>Your search results for:</small>
+              <h6>"<%= keyword %>"</h6>
+            </div>
+            <br>
+          </div>
+
+
+        </div>
+        <!-- /.row -->
+        <div class="row">
+
+          <% for(var j = 0; j < results.length; j++ ) { %>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="/images/<%= img[j].title %>" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#"><%= results[j].name %></a>
+                </h4>
+                <h5>$<%= results[j].price%></h5>
+                <p class="card-text"><%= results[j].desc%></p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+              </div>
+            </div>
+          </div>
+          <%}%>
+
+    </div>
+  </div>
+  </div>
+  </div>
+
+</body>
+<% include ../partials/footer.ejs%>
+
+</html>
