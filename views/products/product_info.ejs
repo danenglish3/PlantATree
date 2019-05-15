@@ -4,6 +4,8 @@
 <% include ../partials/head %>
 
 <body>
+  <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+    crossorigin="anonymous"></script>
 
   <!-- Navigation -->
   <% include ../partials/navbar %>
@@ -14,33 +16,62 @@
     <div class="row">
 
       <!-- /.col-lg-3 -->
-
+      <!--       <h1><%= productid %></h1>
+ -->
       <div class="col-lg-9">
 
         <div class="card mt-4">
-          <img class="card-img-top img-fluid" src="http://www.brownstreefarm.com/data/uploads/media/image/Blue-Spruce-lg.jpg?w=700" alt="">
+          <img class="card-img-top img-fluid"
+            src="http://www.brownstreefarm.com/data/uploads/media/image/Blue-Spruce-lg.jpg?w=700" alt="">
           <div class="card-body">
             <h3 class="card-title">Christmas Tree</h3>
             <h4>$24.99</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat
+              hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi
+              perspiciatis molestias iure, ducimus!</p>
             <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
             4.0 stars
           </div>
         </div>
         <!-- /.card -->
+        <form action="" method="" id="addToCart">
+          <input type="submit" name="addtocart">
+        </form>
+
+        <script type="text/javascript">
+          $('#addToCart').submit(function (e) {
+            e.preventDefault();
+            $.ajax({
+              type: 'POST',
+              url: '/cart/add/<%= productid %>',
+              data: <%= productid %>,
+              processData: false,
+              contentType: false,
+              complete: function (message) {
+                alert(message.responseText);
+              },
+            });
+         });
+        </script>
 
         <div class="card card-outline-secondary my-4">
           <div class="card-header">
             Product Reviews
           </div>
           <div class="card-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique
+              necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia,
+              necessitatibus quae sint natus.</p>
             <small class="text-muted">Posted by Anonymous on 3/1/17</small>
             <hr>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique
+              necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia,
+              necessitatibus quae sint natus.</p>
             <small class="text-muted">Posted by Anonymous on 3/1/17</small>
             <hr>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique
+              necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia,
+              necessitatibus quae sint natus.</p>
             <small class="text-muted">Posted by Anonymous on 3/1/17</small>
             <hr>
             <a href="#" class="btn btn-success">Leave a Review</a>
@@ -56,8 +87,8 @@
   </div>
   <!-- /.container -->
 
-<!--This tag includes the footer section (adds the footer template to the page)-->
-<% include ../partials/footer.ejs%>
+  <!--This tag includes the footer section (adds the footer template to the page)-->
+  <% include ../partials/footer.ejs%>
 
 </body>
 
