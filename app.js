@@ -46,7 +46,7 @@ app.use(require('./routes/index'));
 app.use(require('./routes/product_routes'));
 require('./routes/signupLogin')(app, passport)
 app.use(require('./routes/cart'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/views/checkout'));
 
 
 
