@@ -17,22 +17,15 @@ router.get('/product/:id', function(req, res, next) {
   /*Takes the important information from a product whose id matches the id paramater passed, if there's no such product 
     then it renders user back to the index page.
   */
-  con.query("SELECT * FROM PRODUCT", function(err, result){
+  con.query(`SELECT * FROM PRODUCT WHERE idProduct = "${id}"`, function(err, result){
     if (err) throw err;
+      
+    name = result[0].product_name;
+    price = '$' + result[0].product_price;
+    //Splits extracted description if '\n' is found.
+    description = String(result[0].product_description).split(/\\n/);
 
-    if(id < result.length){
-      name = result[id].product_name;
-      price = '$' + result[id].product_price;
-      description_text = new String(result[id].product_description);
-      /*Splits the description extracted from the database into smaller blocks of string. Since there's no way to detect for 
-        new lines, descriptions in the database require '\n' for this to be able to detect new paragraphs and to make the 
-        product page look nice and neat in general.*/
-      description = description_text.split("\n"); 
-
-    } else {
-      //error - go back to index page
-      res.render('home/index');
-    } 
+    console.log(name, price, description);
 
     /*Queries database for all the images related to a product whose id matches the id parameter passed,
       takes the topmost image from the result and renders a product page while passing all the information extracted from the database.
