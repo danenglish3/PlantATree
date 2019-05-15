@@ -10,7 +10,7 @@ var fs = require('fs');
  */
 router.get('/product/:id', function(req, res, next) {
   var id = req.params.id;
-  var name, price, description_text, description, image, alt;
+  var prod_id, name, price, description_text, description, image, alt;
 
   var image_path = '/images/'; //Should be url where the images are stored/hosted <- change it to fit or just remove entirely
 
@@ -21,9 +21,10 @@ router.get('/product/:id', function(req, res, next) {
     if (err) throw err;
 
     if(id < result.length){
-      name = result[id].product_name;
-      price = '$' + result[id].product_price;
-      description_text = new String(result[id].product_description);
+      prod_id = result[id].idProduct;
+      name = result[id-1].product_name;
+      price = '$' + result[id-1].product_price;
+      description_text = new String(result[id-1].product_description);
       /*Splits the description extracted from the database into smaller blocks of string. Since there's no way to detect for 
         new lines, descriptions in the database require '\n' for this to be able to detect new paragraphs and to make the 
         product page look nice and neat in general.*/
@@ -43,7 +44,7 @@ router.get('/product/:id', function(req, res, next) {
       alt = result[0].name;
       //preferably the image url 
       image = image_path+alt; //used for now
-      res.render('products/product_info', {name: name, price: price, description: description, image: image, alt: alt});
+      res.render('products/product_info', {productid: prod_id, name: name, price: price, description: description, image: image, alt: alt});
     });
   });
 });
