@@ -20,7 +20,7 @@ router.get('/product/:id', function(req, res, next) {
   con.query(`SELECT * FROM PRODUCT WHERE idProduct = "${id}"`, function(err, result){
     if (err) throw err;
       
-    name = result[0].product_name;
+    name = result[0].name;
     price = '$' + result[0].product_price;
     //Splits extracted description if '\n' is found.
     description = String(result[0].product_description).split(/\\n/);

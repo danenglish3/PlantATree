@@ -7,11 +7,16 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="store.js" async></script>
         <link rel="stylesheet" href="stylesheets/cartstyle.css">
+        <script type="text/javascript" src="cart.js"></script>
+        <script type="text/javascript">
+          Cart.init();
+        </script>
     </head>
     <body>
         <% include ../partials/navbar %>
         
         <main>
+        <button onclick="window.onload = test()"> </button>
                 <div class="basket">
                   <div class="basket-product">
                     <div class="item">
