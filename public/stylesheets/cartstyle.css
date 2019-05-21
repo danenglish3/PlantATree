@@ -192,6 +192,22 @@ li.subtotal:before {
   text-decoration: underline;
   text-transform: uppercase;
 }
+.add {
+  bottom: 1.125rem;
+  float: left;
+  position: absolute;
+  right: 0;
+  text-align: left;
+  width: 45%;
+}
+
+.add button {
+  background-color: transparent;
+  color: rgb(41, 7, 233);
+  float: none;
+  text-decoration: underline;
+  text-transform: uppercase;
+}
 
 .item-heading {
   padding-left: 4.375rem;

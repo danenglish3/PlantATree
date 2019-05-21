@@ -46,9 +46,10 @@ app.use(session({
 app.use(require('./routes/index'));
 app.use(require('./routes/product_routes'));
 app.use(require('./routes/search_routes'));
+app.use(require('./routes/newsletter_routes'));
 require('./routes/signupLogin')(app, passport)
 app.use(require('./routes/cart'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/views/checkout'));
 
 
 

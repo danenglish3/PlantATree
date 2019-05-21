@@ -81,5 +81,15 @@ module.exports = {
         connection.query(user, (err, res) => {
             console.log("added user table");
         });
+
+        var email = `CREATE TABLE email (
+                email_ID int(11) NOT NULL AUTO_INCREMENT,
+                email_address varchar(50) NOT NULL,
+                UNIQUE(email_address),
+                PRIMARY KEY(email_ID));`;
+
+        connection.query(email, (err, res) => {
+            console.log("added email table");
+        });
     }
 }
