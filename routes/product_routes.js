@@ -10,7 +10,7 @@ var fs = require('fs');
  */
 router.get('/product/:id', function(req, res, next) {
   var id = req.params.id;
-  var prod_id, name, price, description_text, description, image, alt;
+  var name, price, description_text, description, image, alt;
 
   var image_path = '/images/'; //Should be url where the images are stored/hosted <- change it to fit or just remove entirely
 
@@ -36,7 +36,7 @@ router.get('/product/:id', function(req, res, next) {
       alt = result[0].name;
       //preferably the image url 
       image = image_path+alt; //used for now
-      res.render('products/product_info', {productid: prod_id, name: name, price: price, description: description, image: image, alt: alt});
+      res.render('products/product_info', {name: name, price: price, description: description, image: image, alt: alt});
     });
   });
 });
