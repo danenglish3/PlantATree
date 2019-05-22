@@ -3,23 +3,49 @@ var router = express.Router();
 var connection = require('../database.js');
 
 router.get('/cart', function (req, res) {
-  res.render('checkout/cart');
+  var passedVariable = req.user;
+  var cartUserId = passedVariable.user_ID;
+  var temp3 = getUserCart(cartUserId, "");
+  console.log(temp3);
+
+  temp3.then(getCartProd)
+  .then(function(rows) {
+    res.render('checkout/cart', {rows,passedVariable});
+  });
 });
 
-getUserCart = function (userid,prodid) {
-  console.log(userid);
-  var prodList = [];
-  const queryCart = `SELECT * FROM cart WHERE user_id = "${userid}"`;
+function getCartProd(values){
+  return new Promise(function (resolve, reject) {
+    var prodPool = values[0];
+    var queryData = [prodPool];
+    var query = `SELECT * FROM product where idProduct in (?);`;
+    connection.query(query,queryData, function (err, rows) { 
+      var queryImage = `SELECT name FROM images where product_id in (?);`;
+      connection.query(queryImage,queryData, function(err, rows2) {
+        for(var i =0; i < rows.length; i++){
+          rows[i].image = rows2[i].name;
+        }
+        resolve(rows);
+      })
+    });
+  })
+
+}
+
+function getUserCart(userid, prodid) {
   return new Promise(function (resolve, reject) { //New promise so this finishs completely before moving on
+    var prodList = [];
+    const queryCart = `SELECT * FROM cart WHERE user_id = "${userid}"`;
     connection.query(queryCart, function (err, rows) {
       if (rows === undefined) {
         reject(new Error("Error"));
+      } else if (rows.length === 0){
+        resolve("false");
       } else {
         rows.forEach(element => {
           prodList.push(element.product_id);
         });
-        console.log(prodList);
-        resolve([prodList,userid,prodid]); //Once finished resolve (return) the prodcut array
+        resolve([prodList, userid, prodid]); //Once finished resolve (return) the prodcut array
       }
     });
   })
@@ -29,22 +55,22 @@ function updateCart(values) {
   var prodList = values[0];
   var userid = values[1];
   var prodid = values[2];
-  console.log("list: " + prodList + "   user: " + userid + "  prod: "+prodid);
+  console.log("list: " + prodList + "   user: " + userid + "  prod: " + prodid);
 
-  return new Promise(function (resolve, reject) { 
+  return new Promise(function (resolve, reject) {
     console.log(prodList.length);
 
-  function inArray(needle, haystack) {
+    function inArray(needle, haystack) {
       var length = haystack.length;
-      for(var i = 0; i < length; i++) {
-          if(haystack[i] == needle)
-              return true;
+      for (var i = 0; i < length; i++) {
+        if (haystack[i] == needle)
+          return true;
       }
       return false;
-  }
-  var temp = inArray(prodid,prodList);
-  console.log(temp);
-    if (temp){
+    }
+    var temp = inArray(prodid, prodList);
+    console.log(temp);
+    if (temp) {
       console.log("hello");
       var msg = "Product is already in cart";
       console.log(msg);
@@ -59,21 +85,20 @@ function updateCart(values) {
   });
 }
 
-router.post('/cart/add/:id', (req,res) => {
-
-  if ((req.session.userid === undefined)){
-    var cartUserId = "Daniel";
+router.post('/cart/add/:id', (req, res) => {
+  if (!(req.session.userid === undefined)) {
+    var cartUserId = req.user.user_ID;
     var cartProdId = req.params.id;
-    getUserCart(cartUserId,cartProdId)
-    .then(updateCart)
-    .then(function (msg) {
-      res.send(msg);
-    })
-    .catch(function (err) {
-      console.log("Promise rejection error: " + err);
-    })
+    getUserCart(cartUserId, cartProdId)
+      .then(updateCart)
+      .then(function (msg) {
+        res.send(msg);
+      })
+      .catch(function (err) {
+        console.log("Promise rejection error: " + err);
+      })
   }
   // var message = "Successfully added to cart";
-  
+
 });
 module.exports = router;
