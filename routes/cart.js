@@ -3,15 +3,28 @@ var router = express.Router();
 var connection = require('../database.js');
 
 router.get('/cart', function (req, res) {
-  var passedVariable = req.user;
-  var cartUserId = passedVariable.user_ID;
-  var temp3 = getUserCart(cartUserId, "");
-  console.log(temp3);
+  if (!(req.session.userid === undefined)) {
+    var passedVariable = req.user;
+    var cartUserId = passedVariable.user_ID;
+    var temp3 = getUserCart(cartUserId, "");
+    console.log(temp3);
 
-  temp3.then(getCartProd)
-  .then(function(rows) {
-    res.render('checkout/cart', {rows,passedVariable});
-  });
+    temp3.then(getCartProd)
+    .then(function(rows) {
+      res.render('checkout/cart', {rows,passedVariable});
+    });   
+  } else {
+    //var passedVariable = req.user;
+    var cartUserId = req.sessionID;
+    var temp3 = getUserCart(cartUserId, "");
+    console.log(temp3);
+
+    temp3.then(getCartProd)
+    .then(function(rows) {
+      res.render('checkout/cart', {rows,passedVariable});
+    });    
+  }
+
 });
 
 function getCartProd(values){
@@ -33,15 +46,16 @@ function getCartProd(values){
 }
 
 function getUserCart(userid, prodid) {
+  console.log(prodid);
   return new Promise(function (resolve, reject) { //New promise so this finishs completely before moving on
     var prodList = [];
     const queryCart = `SELECT * FROM cart WHERE user_id = "${userid}"`;
     connection.query(queryCart, function (err, rows) {
       if (rows === undefined) {
         reject(new Error("Error"));
-      } else if (rows.length === 0){
+      } /* else if (rows.length === 0){
         resolve("false");
-      } else {
+      }  */else {
         rows.forEach(element => {
           prodList.push(element.product_id);
         });
@@ -52,13 +66,14 @@ function getUserCart(userid, prodid) {
 }
 
 function updateCart(values) {
+  //console.log(values);
   var prodList = values[0];
   var userid = values[1];
   var prodid = values[2];
-  console.log("list: " + prodList + "   user: " + userid + "  prod: " + prodid);
+  //console.log("list: " + prodList + "   user: " + userid + "  prod: " + prodid);
 
   return new Promise(function (resolve, reject) {
-    console.log(prodList.length);
+    //console.log(prodList.length);
 
     function inArray(needle, haystack) {
       var length = haystack.length;
@@ -88,6 +103,19 @@ function updateCart(values) {
 router.post('/cart/add/:id', (req, res) => {
   if (!(req.session.userid === undefined)) {
     var cartUserId = req.user.user_ID;
+    var cartProdId = req.params.id;
+    getUserCart(cartUserId, cartProdId)
+      .then(updateCart)
+      .then(function (msg) {
+        res.send(msg);
+      })
+      .catch(function (err) {
+        console.log("Promise rejection error: " + err);
+      })
+  } else {
+    var cartUserId = req.sessionID;
+    console.log(req.sessionID);
+
     var cartProdId = req.params.id;
     getUserCart(cartUserId, cartProdId)
       .then(updateCart)
