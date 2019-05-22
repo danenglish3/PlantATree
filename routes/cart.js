@@ -33,6 +33,10 @@ function getCartProd(values){
     var queryData = [prodPool];
     var query = `SELECT * FROM product where idProduct in (?);`;
     connection.query(query,queryData, function (err, rows) { 
+      if(rows===undefined){
+        rows = [];
+        resolve(rows);
+      }
       var queryImage = `SELECT name FROM images where product_id in (?);`;
       connection.query(queryImage,queryData, function(err, rows2) {
         for(var i =0; i < rows.length; i++){
