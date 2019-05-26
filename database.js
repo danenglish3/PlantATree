@@ -1,14 +1,12 @@
 var mysql = require('mysql');
 
 // Change this info to what your local DB connection info is
-/*var connection = mysql.createConnection({
-    host: 'us-cdbr-iron-east-02.cleardb.net',
-    user: 'b88f5293251354',
-    password: 'cd74d17e',
-    database: 'heroku_92d94b814b5bd78',
-});*/
-
-var connection = mysql.createConnection(process.env.JAWSDB_URL);
+var connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'password',
+    database: 'plantatree',
+});
 
 
 // Establishing connection to database using relevant information

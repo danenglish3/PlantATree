@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "start https://plant-a-tree-aut.herokuapp.com/ & nodemon node app.js"
+    "start": "start http://localhost:3000 & nodemon node app.js"
   },
   "dependencies": {
     "@moebius/http-graceful-shutdown": "^1.1.0",
