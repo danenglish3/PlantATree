@@ -13,7 +13,7 @@ var flash = require('connect-flash');
 require('./config/passport')(passport);
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 
 // view engine setup
 app.set('view engine', 'ejs');
