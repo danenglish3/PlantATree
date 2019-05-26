@@ -1,3 +1,4 @@
+// Creates all database tables
 var connection = require('./database');
 
 module.exports = {

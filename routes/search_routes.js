@@ -1,3 +1,4 @@
+// Specifies routes for the search functionality pages.
 var express = require('express');
 var router = express.Router();
 var connection = require('../database.js');

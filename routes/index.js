@@ -1,3 +1,4 @@
+// Specifies routes for the index.ejs page
 var express = require('express');
 var router = express.Router();
 var connection = require('../database.js');
@@ -72,5 +73,3 @@ router.get('/', (req, res, next) => {
 });
 
 module.exports = router;
-
-//get and post

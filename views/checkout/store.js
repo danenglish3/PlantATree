@@ -1,3 +1,5 @@
+// The store.js class contains the functions for calculating the carts total cost.
+
 /* Set values + misc */
 var promoCode;
 var promoPrice;
@@ -15,30 +17,6 @@ $('.remove button').click(function() {
 $(document).ready(function() {
   updateSumItems();
 });
-
-//Can repurpose for discounts?
-// $('.promo-code-cta').click(function() {
-
-//   promoCode = $('#promo-code').val();
-
-//   if (promoCode == '10off' || promoCode == '10OFF') {
-//     //If promoPrice has no value, set it as 10 for the 10OFF promocode
-//     if (!promoPrice) {
-//       promoPrice = 10;
-//     } else if (promoCode) {
-//       promoPrice = promoPrice * 1;
-//     }
-//   } else if (promoCode != '') {
-//     alert("Invalid Promo Code");
-//     promoPrice = 0;
-//   }
-//   //If there is a promoPrice that has been set (it means there is a valid promoCode input) show promo
-//   if (promoPrice) {
-//     $('.summary-promo').removeClass('hide');
-//     $('.promo-value').text(promoPrice.toFixed(2));
-//     recalculateCart(true);
-//   }
-// });
 
 /* Recalculate cart */
 function recalculateCart(onlyTotal) {

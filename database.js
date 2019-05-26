@@ -1,3 +1,4 @@
+// Creates a database connection
 var mysql = require('mysql');
 
 // Change this info to what your local DB connection info is

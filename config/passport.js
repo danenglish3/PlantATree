@@ -1,4 +1,4 @@
-//update a current row
+// Authorization of login and registration.
 var LocalStrategy = require("passport-local").Strategy;
 
 var mysql = require('mysql');

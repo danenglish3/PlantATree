@@ -1,9 +1,8 @@
+// Specifies routes for the product page.
 var express = require('express');
 var router = express.Router();
 var con = require('../database.js'); //From the exported connection from database.js
 var fs = require('fs');
-
-/* GET product page. */
 
 /*
   Queries the databse for all products and produces a dynamic product page based on a product whose id matches the id parameter passed.

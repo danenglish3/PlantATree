@@ -1,7 +1,7 @@
+<!-- index.ejs is the main page for viewing all products, with the ability to
+     navigate to all pages. -->
 <!DOCTYPE html>
 <html lang="en">
-
-<!--This tag includes the header section (all relative bootstrap css is in this file-->
 
 <head>
   <% include ../partials/head %>
@@ -21,7 +21,7 @@
         <div class="list-group">
           <a href="/search/Tree" class="list-group-item">Trees</a>
           <a href="/search/Shrub" class="list-group-item">Shrubs / Bushes</a>
-          <a href="/search/supply" class="list-group-item">Garding Supplies</a>
+          <a href="/search/supply" class="list-group-item">Gardening Supplies</a>
           <div class="list-group-item">
 
             <form onsubmit="window.location = '/search/' + search.value; return false;">
@@ -38,13 +38,8 @@
             </form>
           </div>
         </div>
-
-
-
       </div>
-      <!-- /.col-lg-3 -->
-
-      <div class="col-lg-9">
+     <div class="col-lg-9">
         <p class="text-center display-3">Featured Products</p>
 
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
@@ -93,23 +88,11 @@
             </div>
           </div>
           <%}%>
-
-        
         </div>
-        <!-- /.row -->
-
       </div>
-      <!-- /.col-lg-9 -->
-
     </div>
-    <!-- /.row -->
-
   </div>
-  <!-- /.container -->
-
-<!--This tag includes the footer section (adds the footer template to the page)-->
-<% include ../partials/footer.ejs%>
-
+  <% include ../partials/footer.ejs%>
 </body>
 
 </html>

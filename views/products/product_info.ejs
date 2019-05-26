@@ -1,23 +1,18 @@
+<!-- product_info.ejs is linked from selecting a product to view. It displays
+     additional details and facts about a product with a button to add to cart. -->
 <!DOCTYPE html>
 <html lang="en">
   <% include ../partials/head %>
 
 <body> 
-  
   <!-- Navigation -->
   <% include ../partials/navbar %>
 
   <!-- Page Content -->
   <div class="container">
-
     <div class="row">
-
-      <!-- /.col-lg-3 -->
-
       <div class="col-lg-9">
-
-        <div class="card mt-4">
-          
+        <div class="card mt-4"> 
           <div class="card-body">
           <!-- Changes the information on the product card based on what's been sent by the product_routes.js. Ratings are excluded for now. -->
             <img class="card-img-top img-fluid" src='<%= image %>' alt='<%= alt %>'>
@@ -34,7 +29,6 @@
             </div>
           </div>
         </div>
-        <!-- /.card -->
 
         <div class="card card-outline-secondary my-4">
           <div class="card-header">
@@ -53,19 +47,12 @@
             <a href="#" class="btn btn-success">Leave a Review</a>
           </div>
         </div>
-        <!-- /.card -->
-
       </div>
-      <!-- /.col-lg-9 -->
-
     </div>
-
   </div>
-  <!-- /.container -->
 
 <!--This tag includes the footer section (adds the footer template to the page)-->
 <% include ../partials/footer.ejs%>
-
 </body>
 
 </html>

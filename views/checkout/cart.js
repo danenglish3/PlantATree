@@ -1,3 +1,4 @@
+// The store.js class contains the functions for adding and removing items to the cart.
 var Cart = {};
 
 Cart.on = function(eventName, callback) {
