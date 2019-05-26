@@ -35,6 +35,7 @@ module.exports = function(app, passport) {
     //***ADDED HERE */
    
     app.get('/logout', function(req,res){
+     req.session.userid = undefined;
      req.logout();
      res.redirect('/');
     })

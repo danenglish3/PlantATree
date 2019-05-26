@@ -96,6 +96,7 @@ function updateSumItems() {
 function removeItem(removeButton) {
   /* Remove row from DOM and recalc cart total */
   var productRow = $(removeButton).parent().parent();
+  console.log(productRow);
   productRow.slideUp(fadeTime, function() {
     productRow.remove();
     recalculateCart();

@@ -8,6 +8,7 @@ var fs = require('fs');
   Queries the databse for all products and produces a dynamic product page based on a product whose id matches the id parameter passed.
  */
 router.get('/product/:id', function(req, res, next) {
+  var passedVariable = req.user;
   var id = req.params.id;
   var name, price, description_text, description, image, alt;
 
@@ -35,7 +36,7 @@ router.get('/product/:id', function(req, res, next) {
       alt = result[0].name;
       //preferably the image url 
       image = image_path+alt; //used for now
-      res.render('products/product_info', {name: name, price: price, description: description, image: image, alt: alt});
+      res.render('products/product_info', {name: name, price: price, description: description, image: image, alt: alt, productid:id, passedVariable});
     });
   });
 });

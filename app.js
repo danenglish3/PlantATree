@@ -35,7 +35,8 @@ app.use(bodyParser.urlencoded({
 app.use(session({
   secret: 'justasecret',
   resave:true,
-  saveUninitialized: true
+  saveUninitialized: true,
+  maxAge: 3600000
  }));
  
  app.use(passport.initialize());

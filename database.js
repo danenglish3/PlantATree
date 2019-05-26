@@ -9,6 +9,7 @@ var connection = mysql.createConnection({
     database: 'plantatree',
 });
 
+
 // Establishing connection to database using relevant information
 connection.connect((err) => {
     if (err) throw err;

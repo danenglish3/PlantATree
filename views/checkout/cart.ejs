@@ -12,49 +12,33 @@
     </head>
     <body>
         <% include ../partials/navbar %>
-        
         <main>
                 <div class="basket">
-                  <div class="basket-product">
-                    <div class="item">
-                      <div class="product-image" >
-                        <img src="/images/Apple-Tree.jpg" alt="Apple Tree" class="product-frame">
+                  <% if (rows.length  === 0) { %>
+                    <p>There is nothing in the cart</p>
+                  <% } %>
+                  <% for(var i =0; i < rows.length; i++) { %>
+                    <div class="basket-product">
+                      <div class="item">
+                        <div class="product-image" >
+                            <a href="/product/<%= rows[i].idProduct %>"><img src="/images/<%= rows[i].image %>" alt="Apple Tree" class="product-frame"></a>
+                        </div>
+                        <div class="product-details">
+                          <h1><strong><span class="item-quantity"></span><%= rows[i].product_name %></strong> </h1>
+                          <p><strong>Age? Size?</strong></p>
+                          <p>Identification tag: <%= rows[i].idProduct %></p>
+                        </div>
                       </div>
-                      <div class="product-details">
-                        <h1><strong><span class="item-quantity"></span> Apple Tree</strong> An apple tree!</h1>
-                        <p><strong>Age? Size?</strong></p>
-                        <p>Product Code: </p>
+                      <div class="price"><%= rows[i].product_price %></div>
+                      <div class="quantity">
+                        <input type="number" value="1" min="1" class="quantity-field">
                       </div>
-                    </div>
-                    <div class="price">44.00</div>
-                    <div class="quantity">
-                      <input type="number" value="4" min="1" class="quantity-field">
-                    </div>
-                    <div class="subtotal">104.00</div>
-                    <div class="remove">
-                      <button>Remove</button>
-                    </div>
-                  </div> <!--This is the end of one cart item-->
-                  <div class="basket-product">
-                    <div class="item">
-                      <div class="product-image">
-                        <img src="/images/banana-tree.jpg" alt="Placholder Image 2" class="product-frame">
-                      </div>
-                      <div class="product-details">
-                        <h1><strong><span class="item-quantity"></span> Banana Tree</strong> A banana tree!</h1>
-                        <p><strong>Age? Size?</strong></p>
-                        <p>Product Code: </p>
+                      <div class="subtotal"><%= rows[i].product_price %></div>
+                      <div class="remove">
+                        <button>Remove</button>
                       </div>
                     </div>
-                    <div class="price">26.00</div>
-                    <div class="quantity">
-                      <input type="number" value="1" min="1" class="quantity-field">
-                    </div>
-                    <div class="subtotal">26.00</div>
-                    <div class="remove">
-                      <button>Remove</button>
-                    </div>
-                  </div>
+                  <% } %>
                 </div>
                 <aside>
                   <div class="summary">
