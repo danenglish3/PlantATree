@@ -8,7 +8,7 @@ var mysql = require('mysql');
     database: 'heroku_92d94b814b5bd78',
 });*/
 
-var connection = mysql.createConnection(proces.env.JAWSDB_URL);
+var connection = mysql.createConnection(process.env.JAWSDB_URL);
 
 
 // Establishing connection to database using relevant information
